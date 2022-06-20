@@ -48,7 +48,7 @@ async function useModule(app: any) {
             if (components) {
                 for (const i in components) {
                     if (components[i]) {
-                        if (components[i].cool?.global || i.indexOf("h-") === 0) {
+                        if (components[i].xiaoyou?.global || i.indexOf("h-") === 0) {
                             app.component(components[i].name, components[i]);
                         }
                     }
@@ -103,7 +103,7 @@ async function useModule(app: any) {
 
         if (fn === "pages" || fn === "views") {
 
-            const path = value.cool ? value.cool.route.path : null
+            const path = value.xiaoyou ? value.xiaoyou.route.path : null
 
             if (cname && (cname.includes(".vue") || cname.includes(".tsx"))) {
                 // pagesViews[cname] = value
@@ -222,7 +222,7 @@ async function useModule(app: any) {
                         if (e.components) {
                             for (const i in e.components) {
                                 // 全局注册
-                                e.components[i].cool = {
+                                e.components[i].xiaoyou = {
                                     global: true
                                 };
                             }
@@ -245,9 +245,9 @@ async function useModule(app: any) {
 
                 case "pages":
                 case "views":
-                    if (value.cool) {
+                    if (value.xiaoyou) {
                         d[fn].push({
-                            ...value.cool.route,
+                            ...value.xiaoyou.route,
                             component: value
                         });
                     }
