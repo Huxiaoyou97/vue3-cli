@@ -1,0 +1,31 @@
+
+
+import { isObject } from "../utils";
+
+export function Service(value: any) {
+    return function (target: any) {
+        // 命名
+        if (typeof value == "string") {
+            target.prototype.namespace = value;
+        }
+
+        // 复杂项
+        if (isObject(value)) {
+            const { proxy, namespace, url, mock } = value;
+            // @ts-ignore
+            const item: any = null;
+
+            if (proxy && !item) {
+                console.error(`${proxy} 指向的地址不存在！`);
+            }
+
+            target.prototype.namespace = namespace;
+            target.prototype.mock = mock;
+
+            if (proxy) {
+                target.prototype.proxy = proxy;
+                target.prototype.url = url || item ? item.target : null;
+            }
+        }
+    };
+}

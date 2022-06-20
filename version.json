@@ -1,0 +1,14 @@
+{
+    "/demo": {
+        "demo_base.vue": [
+            "base"
+        ],
+        "demo_v1.vue": [
+            "v1"
+        ],
+        "demo_v2.vue": [
+            "v2"
+        ]
+    },
+    "inherit": true
+}
