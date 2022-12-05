@@ -1,6 +1,8 @@
 function getCookie(cookieName: string) {
-    let cookieValue = null;
+    let cookieValue: any = null;
+
     let CookieList: string[] | [] = [];
+
     if (document.cookie) {
         if (document.cookie.includes("; ")) {
             CookieList = document.cookie.split("; ");
@@ -26,6 +28,10 @@ function getCookie(cookieName: string) {
 }
 
 // 获取版本  默认base
-let version = getCookie("theme") || "base"
+let version = getCookie("web_theme") || "base"
+
+export {
+    getCookie
+}
 
 export default version

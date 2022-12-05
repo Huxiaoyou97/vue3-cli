@@ -27,6 +27,7 @@ import 'element-plus/dist/index.css'
 
 import {useAppStore} from "@/store/app";
 import {gp, messageSetup} from "@/core/hook/useMessage";
+import handleClipboard from "@/core/utils/clipboard";
 
 const app = createApp(App);
 
@@ -43,6 +44,7 @@ bootstrap(app)
             size: 'default'
         })
         app.config.globalProperties.$t = (i18n.global as any).t
+        app.config.globalProperties.$doCopy = handleClipboard
 
         messageSetup(app)
 
