@@ -9,7 +9,7 @@ import {useLoading} from "@/core/hook/useLoading";
 // import "$/base/styles/axam.less"
 
 export default defineComponent({
-    xiaoyou: {
+    routerCfg: {
         route: {
             path: "/exam-useLoading"
         }

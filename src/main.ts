@@ -14,17 +14,19 @@ import router from "./router";
 // vuex替代品
 import pinia from './store'
 
-
 // i18n
-import vueI18n from "./core/i18n"
+import i18n from "./core/i18n"
 
 // naive
 import naive from 'naive-ui'
 
-// loading
-// @ts-ignore
-import loadingDirective from "./directives/directive.js"
+// element-plus
+import ElementPlus from 'element-plus'
+import 'element-plus/dist/index.css'
+
+
 import {useAppStore} from "@/store/app";
+import {gp, messageSetup} from "@/core/hook/useMessage";
 
 const app = createApp(App);
 
@@ -36,7 +38,15 @@ bootstrap(app)
         // 事件通讯
         app.provide("mitt", mitt());
 
-        app.use(vueI18n).use(router).use(naive).directive('loading', loadingDirective).mount("#app");
+        app.use(i18n).use(router).use(naive).use(ElementPlus, {
+            // 支持 large、default、small
+            size: 'default'
+        })
+        app.config.globalProperties.$t = (i18n.global as any).t
+
+        messageSetup(app)
+
+        app.mount("#app");
 
         // const userStore = useUserStore()
         const appStore = useAppStore()

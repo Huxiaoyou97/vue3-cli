@@ -16,7 +16,7 @@ import {isNumber} from "@/core/utils";
 export default defineComponent({
     name: "icon-svg",
 
-    xiaoyou: {
+    routerCfg: {
         global: true
     },
 

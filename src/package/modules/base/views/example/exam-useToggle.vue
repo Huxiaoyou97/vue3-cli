@@ -20,7 +20,7 @@ import {defineComponent} from "vue";
 import useToggle from "@/core/hook/useToggle";
 
 export default defineComponent({
-    xiaoyou: {
+    routerCfg: {
         route: {
             path: "/exam-useToggle"
         }

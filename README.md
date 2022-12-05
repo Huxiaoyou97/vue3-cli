@@ -31,7 +31,7 @@
     - `views`页面文件 layout会显示 新建一个vue文件即可完成创建一个页面 无需手动添加路由 只需在页面上如下写
       ```typescript
         export default defineComponent({
-            xiaoyou: {
+            routerCfg: {
                 route: {
                     path: "/chat",
                 },

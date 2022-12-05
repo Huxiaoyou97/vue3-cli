@@ -8,7 +8,7 @@ import {defineComponent} from "vue";
 import {useState} from "@/core/hook/useState";
 
 export default defineComponent({
-    xiaoyou: {
+    routerCfg: {
         route: {
             path: "/exam-useState"
         }

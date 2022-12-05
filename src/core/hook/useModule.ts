@@ -40,15 +40,15 @@ async function useModule(app: any) {
             // }
 
             // 注册请求服务
-            if (service) {
-                deepMerge(store.service, service)
-            }
+            // if (service) {
+            //     deepMerge(store.service, service)
+            // }
 
             // 注册组件
             if (components) {
                 for (const i in components) {
                     if (components[i]) {
-                        if (components[i].xiaoyou?.global || i.indexOf("h-") === 0) {
+                        if (components[i].routerCfg?.global || i.indexOf("h-") === 0) {
                             app.component(components[i].name, components[i]);
                         }
                     }
@@ -103,7 +103,7 @@ async function useModule(app: any) {
 
         if (fn === "pages" || fn === "views") {
 
-            const path = value.xiaoyou ? value.xiaoyou.route.path : null
+            const path = value.routerCfg ? value.routerCfg.route.path : null
 
             if (cname && (cname.includes(".vue") || cname.includes(".tsx"))) {
                 // pagesViews[cname] = value
@@ -183,8 +183,6 @@ async function useModule(app: any) {
                 const val = l[item.name]
 
                 if (!val.includes(version)) {
-                    // console.log(pagesViews[i], "pagesViews[i]")
-                    // console.log(pagesViews[i], i, "pagesViews[i]")
                     delete pagesViews[i]
                 }
             }
@@ -222,7 +220,7 @@ async function useModule(app: any) {
                         if (e.components) {
                             for (const i in e.components) {
                                 // 全局注册
-                                e.components[i].xiaoyou = {
+                                e.components[i].routerCfg = {
                                     global: true
                                 };
                             }
@@ -236,18 +234,18 @@ async function useModule(app: any) {
             }
             // 其他功能
             switch (fn) {
-                case "service":
-                    d._services.push({
-                        path: i.replace(`/src/package/modules/${name}/service`, `${name}`),
-                        value: new value()
-                    });
-                    break;
+                // case "service":
+                //     d._services.push({
+                //         path: i.replace(`/src/package/modules/${name}/service`, `${name}`),
+                //         value: new value()
+                //     });
+                //     break;
 
                 case "pages":
                 case "views":
-                    if (value.xiaoyou) {
+                    if (value.routerCfg) {
                         d[fn].push({
-                            ...value.xiaoyou.route,
+                            ...value.routerCfg.route,
                             component: value
                         });
                     }
@@ -297,7 +295,6 @@ async function useModule(app: any) {
             e.service = deepFiles(e._services);
         }
 
-        console.log(e, "----v")
         if (isObject(e.value)) {
             if (isFunction(e.value.install)) {
                 Object.assign(e, e.value.install(app, e.options));

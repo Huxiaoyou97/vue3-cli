@@ -1,13 +1,12 @@
 /**
  * @author 胡小右
  * @date 2022-06-17 19:50:27
- * @desc 核心Hook 将常用的 ref service mitt router 多语言等进行集成
+ * @desc 核心Hook 将常用的 service mitt router i18n 等进行集成
  */
 
 import {inject} from "vue";
 import {useRoute, useRouter} from "vue-router";
 import {useI18n} from 'vue-i18n'
-import {useRefs} from "@/core";
 
 // 全局状态管理
 import {useUserStore} from '@/store/user'
@@ -15,13 +14,12 @@ import {useAppStore} from "@/store/app";
 import {useModuleStore} from "@/store/module";
 
 
-import {useNotification, NotificationType} from 'naive-ui'
 import {ServiceType} from "@/core/types";
 import {Emitter} from "mitt";
+import {gp} from "@/core/hook/useMessage";
 
 
 export default function useComp() {
-    const {refs, setRefs} = useRefs();
     const service = inject<ServiceType>("service");
     const mitt: Emitter<any> = inject<any>("mitt");
     const route = useRoute();
@@ -32,13 +30,9 @@ export default function useComp() {
     const appStore = useAppStore()
     const moduleStore = useModuleStore()
 
-    const notification = useNotification()
-
     return {
         route,
         router,
-        refs,
-        setRefs,
         service,
         mitt,
         locale,
@@ -47,19 +41,40 @@ export default function useComp() {
         userStore,
         appStore,
         moduleStore,
-        notice: function (content: any, type: NotificationType = "success", isClose: boolean = true) {
 
-            let data: any = {
-                content,
-            }
-            if (isClose) {
-                data = {
-                    ...data,
-                    duration: 2000
-                }
+        $baseNotify: gp.$baseNotify,
+
+        $baseAlert: gp.$baseAlert,
+
+        $baseMessage: gp.$baseMessage,
+
+        $baseConfirm: gp.$baseConfirm,
+
+        $basePrompt: gp.$basePrompt,
+
+        getImageUrl: (name: string) => {
+            let path: string = `/src/assets/image/${locale.value}/${name}`
+
+            let modules: any = null
+
+            switch (locale.value) {
+                case "zh-cn":
+                    modules = import.meta.globEager("/src/assets/images/zh-cn/**/*");
+                    break;
+                case "en":
+                    modules = import.meta.globEager("/src/assets/images/en/**/*");
+                    break;
+                case "pt":
+                    modules = import.meta.globEager("/src/assets/images/pt/**/*");
+                    break;
+                default:
+                    modules = import.meta.globEager("/src/assets/images/en/**/*");
+                    break;
             }
 
-            notification[type](data)
-        }
+            if (modules[path]) {
+                return modules[path].default;
+            }
+        },
     }
 }

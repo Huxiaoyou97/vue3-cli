@@ -8,7 +8,7 @@ import {computed, defineComponent, nextTick} from "vue";
 import useComp from "@/core/hook/useComp";
 
 export default defineComponent({
-    xiaoyou: {
+    routerCfg: {
         route: {
             path: "/exam-useComp"
         }

@@ -1,3 +1,6 @@
 {
-    "message.language": "language"
+    "语言": "language",
+    "确定": "ok",
+    "取消": "cancel",
+    "温馨提示": "prompt",
 }

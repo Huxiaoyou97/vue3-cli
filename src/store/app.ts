@@ -23,7 +23,7 @@ export const useAppStore = defineStore({
 
     actions: {
         async APP_LOAD() {
-            console.log("service: ", store.service?.base)
+            // console.log("service: ", store.service?.base)
         },
     }
 })
